@@ -1,4 +1,8 @@
-# 🚀 Roteiro de Estudos: Desenvolvedor Fullstack Júnior
+# Sobre mim
+Meu nome é Gabriel, tenho 22 anos e estou focando meus estudos na área FullStack Web.
+Este repositório é destinado a registrar os conteúdos estudados durante essas 15 semanas.
+
+## 🚀 Roteiro de Estudos: Desenvolvedor Fullstack Júnior
 
 Bem-vindo ao seu workspace de estudos! Este repositório foi estruturado para materializar o plano de estudos detalhado no documento **"Roteiro de Estudos para Desenvolvedor Fullstack Júnior"**, focado em desenvolvedores com experiência em Frontend que buscam a transição sólida para o Backend e arquitetura de software, visando o mercado internacional e projetos freelancer.
 
@@ -10,20 +14,15 @@ O cronograma cobre **15 semanas** divididas em **4 módulos práticos**, com des
 
 O repositório está organizado da seguinte forma:
 
-*   **[`README.md`](file:///c:/Users/gm882/Downloads/Projeto%20Antigravity/README.md)**: Esta visão geral do plano de estudos, objetivos e estrutura.
-*   **[`cronograma.md`](file:///c:/Users/gm882/Downloads/Projeto%20Antigravity/cronograma.md)**: Seu roteiro semanal de estudos detalhado (Semanas 01 a 15) com checkboxes para controle de progresso.
-*   **[`recursos.md`](file:///c:/Users/gm882/Downloads/Projeto%20Antigravity/recursos.md)**: Referências de estudo, documentações oficiais, artigos e termos-chave recomendados para cada semana.
+*   **[`README.md`](/README.md)**: Esta visão geral do plano de estudos, objetivos e estrutura.
+*   **[`cronograma.md`](/cronograma.md)**: Seu roteiro semanal de estudos detalhado (Semanas 01 a 15) com checkboxes para controle de progresso.
+*   **[`recursos.md`](/recursos.md)**: Referências de estudo, documentações oficiais, artigos e termos-chave recomendados para cada semana.
 *   **📂 `anotacoes/`**: Pasta dedicada aos seus resumos e códigos de estudo.
-    *   **[`semana-01.md`](file:///c:/Users/gm882/Downloads/Projeto%20Antigravity/anotacoes/semana-01.md)**: Modelo padrão estruturado para você copiar e usar em cada nova semana de estudos.
+    *   **[`semana-01.md`](/semana-01.md)**: Modelo padrão estruturado para você copiar e usar em cada nova semana de estudos.
 
 ---
 
 ## 🗺️ Visão Geral do Cronograma (15 Semanas)
-
-```mermaid
-grid
-    theme default
-```
 
 | Módulo | Período | Foco Principal | Projeto Prático |
 | :--- | :--- | :--- | :--- |
@@ -36,9 +35,9 @@ grid
 
 ## 🛠️ Como Utilizar Este Repositório
 
-1.  **Acompanhe o Progresso**: Utilize o arquivo [`cronograma.md`](file:///c:/Users/gm882/Downloads/Projeto%20Antigravity/cronograma.md) para marcar suas tarefas à medida que as conclui.
-2.  **Faça suas Anotações**: Para cada semana de estudos, crie uma cópia do modelo [`anotacoes/semana-01.md`](file:///c:/Users/gm882/Downloads/Projeto%20Antigravity/anotacoes/semana-01.md) dentro da pasta `anotacoes/` (ex: `semana-02.md`, `semana-03.md`) e preencha com seus resumos e códigos práticos.
-3.  **Consulte os Recursos**: Acesse [`recursos.md`](file:///c:/Users/gm882/Downloads/Projeto%20Antigravity/recursos.md) para encontrar os materiais de apoio e documentações recomendados para cada etapa do roteiro.
+1.  **Acompanhe o Progresso**: Utilize o arquivo [`cronograma.md`](/cronograma.md) para marcar suas tarefas à medida que as conclui.
+2.  **Faça suas Anotações**: Para cada semana de estudos, crie uma cópia do modelo [`anotacoes/semana-01.md`](/anotacoes/semana-01.md) dentro da pasta `anotacoes/` (ex: `semana-02.md`, `semana-03.md`) e preencha com seus resumos e códigos práticos.
+3.  **Consulte os Recursos**: Acesse [`recursos.md`](/recursos.md) para encontrar os materiais de apoio e documentações recomendados para cada etapa do roteiro.
 4.  **Codifique e Publique**: Crie pastas separadas no seu computador para os projetos práticos de cada módulo e faça o commit deles para o GitHub, usando as orientações de README descritas no cronograma.
 
 ---
@@ -46,4 +45,4 @@ grid
 ## 🎯 Objetivo Final
 Ao término das 15 semanas, você terá construído **4 projetos práticos de alto nível**, demonstrando domínio completo de conceitos arquiteturais modernos, testes automatizados, segurança no frontend e backend, e banco de dados.
 
-*Bons estudos! A persistência é a chave para o sucesso internacional.* 🚀
+**Bons estudos! _"O sucesso é a soma de pequenos esforços repetidos dia após dia."_** 🚀
