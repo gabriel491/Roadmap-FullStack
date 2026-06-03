@@ -167,17 +167,25 @@ Use blocos de código para fixar a sintaxe estudada nesta semana.
     Interfaces se estendem de forma muito limpa e legível, igualzinho à herança de classes.
     
     ```tsx
-    interface ElementoHTML {
-      id: string;
-      className: string;
+    interface UserWallet {
+        // O ponto de interrogação indica que a propriedade é opcional, ou seja, pode ou não estar presente no objeto.
+        coins?: number;
+        credits?: number;
     }
     
-    // Criamos um contrato novo herdando o anterior
-    interface InputTexto extends ElementoHTML {
-      placeholder: string;
-      value: string;
+    interface User {
+        name: string;
+        createAt: Date;
+        wallet: UserWallet; // wallet vai estar recebendo as propriedades de UserWallet, ou seja, coins e credits, que são opcionais.
+    }
+    
+    interface Admin extends User {
+        ban(user: User): void; // O método ban recebe um usuário como argumento e não retorna nada (void).
+        kick(user: User): void; // O método kick recebe um usuário como argumento e não retorna nada (void).
     }
     ```
+    
+    A interface Admin estende a interface User, ou seja, ela herda todas as propriedades de User (name, createAt e wallet) e adiciona os métodos ban e kick.
     
     ### Quando usar `type` (Uniões, Opções e Apelidos Estritos)
     
@@ -207,6 +215,44 @@ Use blocos de código para fixar a sintaxe estudada nesta semana.
     
     // Criando um novo tipo que é a junção dos dois
     type UsuarioAdmin = Usuario & Admin;
+    ```
+    
+    Aqui acontece uma união de Interfaces utilizando o type
+    
+    ```tsx
+    interface Dog {
+      name: string;
+      breed: string;
+      bark(): string;
+    }
+    
+    interface Cat {
+      name: string;
+      color: string;
+      meow(): string;
+    }
+    interface Bird {
+      name: string;
+      wingspan: number;
+      chirp(): string;
+    }
+    interface Cow {
+      name: string;
+      weight: number;
+      moo(): string;
+    }
+    
+    type Animal = Dog | Cat | Bird | Cow;
+    
+    function createAnimal(animal: Animal): void {}
+    // Aqui ao passar argumentos para a função ele vai se conectar com todas as interfaces.
+    createAnimal({
+        name: "Toto",
+        color: "Preto",
+        meow() {
+            return "Meow!";
+        }
+    })
     ```
     
 - **tsconfig.json**
