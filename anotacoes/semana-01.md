@@ -1,5 +1,3 @@
-# Roadmap Desenvolvedor FullStack
-
 # 📝 Anotações de Estudo: Semana 01
 
 Use este modelo para registrar seus aprendizados, códigos práticos, dúvidas e progresso.
@@ -36,7 +34,7 @@ Void:** Executa a função até o fim, mas não retorna nada (retorna `undefined
 
 *Tabela comparativa ou resumo rápido:*
 
-- **Interface:** Utilize para definir a estrutura de objetos públicos, contratos de APIs, serviços e classes. Elas suportam **Declaration Merging** (extensão automática ao declarar interfaces com o mesmo nome), o que é ideal para bibliotecas e plugins.
+- **Interface:** A interface serve como um "contrato" ou um molde para o formato que queremos que o objeto final tenha. Utilize para definir a estrutura de objetos públicos, contratos de APIs, serviços e classes. Elas suportam **Declaration Merging** (extensão automática ao declarar interfaces com o mesmo nome), o que é ideal para bibliotecas e plugins.
     - Exemplo: Você pode criar uma interface chamada `Botao`, e mais embaixo no código criar outra chamada `Botao` de novo; o TypeScript vai juntar as duas em uma só
 - **Type Alias:** É uma definição **matemática/apelido fechado**. Uma vez definido, ele não muda. Ele é excelente para criar combinações, listas de opções estritas (uniões) ou apelidos para coisas complexas. Utilize para uniões, interseções, tipos primitivos mapeados, tuplas ou lógica de tipos complexos (Mapeamento/Condicionais).
 
@@ -347,8 +345,8 @@ Anote aqui o que foi mais difícil ou as dúvidas que surgiram para pesquisar de
 
 ## 🔗 Links Úteis
 
-- [TypeScript Playground](https://www.typescriptlang.org/play)
-- [Meu repositório de exercícios](https://github.com/gabriel491/Roadmap-FullStack/blob/main/anotacoes/semana-01.md)
+- TypeScript Playground
+- Meu repositório de exercícios
 
 ---
 
@@ -358,11 +356,9 @@ Anote aqui o que foi mais difícil ou as dúvidas que surgiram para pesquisar de
 
 > *Escreva aqui o progresso do seu projeto prático ou desafios resolvidos.*
 > 
-- Desafio da Semana
+- **Desafio da Semana**
     
     ## 🧠 Seu Desafio de Código: Semana 01
-    
-    Para validarmos o seu entendimento técnico e avançarmos para a próxima semana, resolva o seguinte cenário de arquitetura/código:
     
     ### Contexto do Cenário
     
@@ -379,3 +375,150 @@ Anote aqui o que foi mais difícil ou as dúvidas que surgiram para pesquisar de
     4. Crie uma função `handleDeviceTelemetry(payload: unknown): string` que utilize os seus Type Guards. Se for um Roteador, retorne uma string formatada simulando o log de rede. Se for um Servidor, faça o mesmo. Se o payload for inválido, use o tipo `never` ou lance uma exceção apropriada.
     
     **Como responder:** Escreva o código completo em TypeScript respondendo a este prompt. Assim que você postar a solução, farei o Code Review e abriremos os tópicos da **Semana 02**. Está pronto? Mãos à obra.
+    
+    - **Código**
+        
+        ### **Função** `isRouterMetrics`:
+        
+        #### Linha 1:
+        
+        - **`(metrics: unknown)`**: O parâmetro que a função recebe se chama `metrics`. O tipo dele é `unknown` (desconhecido), o que significa que pode ser qualquer coisa que veio da rede.
+        - **`: metrics is RouterMetrics`**: Aqui está o segredo do **Type Guard**. Em vez de dizer que a função retorna apenas um `boolean` comum, você está dizendo ao compilador do TypeScript: *"Se esta função retornar `true`, você pode ter certeza de que o objeto `metrics` que eu te passei é do tipo `RouterMetrics`"*.
+        
+        #### Linha 2:
+        
+        - **`(metrics as RouterMetrics)`**: Isso é um **Type Assertion** (afirmação de tipo). Como `metrics` é `unknown`, o TypeScript não deixa você acessar nenhuma propriedade dele. Com o `as RouterMetrics`, você diz: *"TypeScript, finja por um segundo que este objeto é um RouterMetrics para eu poder testar uma coisa"*.
+        - **`.throughputMbps !== undefined`**: Aqui você acessa a propriedade e checa: *"Essa propriedade existe e é diferente de `undefined`?"*. Se ela existir no objeto real, essa parte se torna `true`.
+        
+        ### Função `isServerMetrics`
+        
+        - Ao usar `typeof metrics === 'object'`, `metrics != null` e o operador `'propriedade' in metrics`, você garantiu que o código nunca vai quebrar, mesmo que o dado que venha da rede seja algo completamente bizarro (como uma string ou um número).
+        
+        ```tsx
+        interface RouterMetrics {
+            throughputMbps: number;
+            droppedPackets: number;
+        }
+        
+        interface ServerMetrics {
+            cpuUsagePercent: number;
+            ramUsageGb: number;
+        }
+        
+        type DevicePayload = {
+            deviceId: string;
+            timestamp: number;
+            metrics: RouterMetrics | ServerMetrics;
+        }
+        
+        function isRouterMetrics(metrics: unknown): metrics is RouterMetrics {
+            return (metrics as RouterMetrics).throughputMbps !== undefined &&
+             (metrics as RouterMetrics).droppedPackets !== undefined;
+        }
+        
+        function isServerMetrics(metrics: unknown): metrics is ServerMetrics{
+            // Primeiro checa se é um objeto válido, depois checa se as chaves existem nele
+            return typeof metrics === 'object' && metrics != null &&
+            'cpuUsagePercent' in metrics && 
+            'ramUsageGb' in metrics;
+        }
+        
+        function isDevicePayload(payload: unknown): payload is DevicePayload {
+            return typeof payload === 'object' && payload != null &&
+            'deviceId' in payload &&
+            'timestamp' in payload &&
+            'metrics' in payload
+        }
+        
+        function handleDeviceTelemetry(payload: unknown): string {
+            if (!isDevicePayload(payload)) {
+                throw new Error('Payload inválido');
+            }
+        
+            if (isRouterMetrics(payload.metrics)) {
+                return `Roteador ${payload.deviceId} - Throughput: ${payload.metrics.throughputMbps} Mbps`
+            }
+        
+            if (isServerMetrics(payload.metrics)) {
+                return `Servidor ${payload.deviceId} - CPU: ${payload.metrics.cpuUsagePercent}%, RAM: 
+                ${payload.metrics.ramUsageGb} GB`
+            }
+        
+            // Tratamento caso o payload seja válido, mas as métricas não sejam reconhecidas
+            throw new Error('Métricas inválidas');
+        
+        }
+        ```
+        
+- **Desafio 2**
+    
+    Você está criando um **Wrapper de Resposta de API** para o seu frontend. As respostas da API sempre vêm em um formato padrão do backend, mas o conteúdo dos dados (`data`) muda dependendo da página que está chamando.
+    
+    1. Crie uma interface genérica chamada `ApiResponse<T>` que tenha três propriedades:
+        - `status`: um número (ex: 200, 400).
+        - `success`: um boolean.
+        - `data`: que deve ser do tipo genérico `T`.
+    2. Crie uma restrição: o seu tipo `T` **deve obrigatoriamente** ser um objeto (dica: `<T extends object>`).
+    3. Crie uma função chamada `parseApiResponse<T extends object>(response: unknown): ApiResponse<T>`.
+        - Ela deve receber uma resposta do tipo `unknown` (simulando o dado bruto que veio da rede).
+        - Dentro dela, use um Type Guard simples para garantir que a `response` é um objeto válido, que possui as propriedades `status` e `data`.
+        - Se for válido, retorne o dado tipado como `ApiResponse<T>`. Se for inválido, lance um erro.
+    
+    ```tsx
+    // Criamos uma interface genérica. O <T extends object> significa que quem usar
+    // essa interface DEVE passar um tipo que seja um objeto (não pode ser número, string, etc.)
+    interface ApiResponse<T extends object> {
+      status: number;
+      success: boolean;
+      data: T; // O dado interno assume o tipo que passarmos para T
+    }
+    
+    // Type Guard para validar se um valor é do tipo ApiResponse
+    // Esta função recebe um valor 'unknown' e avisa o TypeScript: "se eu retornar true,
+    // significa que esse valor é um objeto com as propriedades status e data".
+    
+    // A função parseadora também é genérica <T extends object> para poder repassar esse tipo para a interface.
+    function parseApiResponse<T extends object>(response: unknown): ApiResponse<T> {
+      
+      // Implementação do Type Guard para validar a estrutura do objeto
+      // Checamos se a resposta existe, se é um objeto e se não é nula
+      if (typeof response === 'object' && response !== null) {
+        
+        // Verificamos se as propriedades obrigatórias do contrato existem no objeto
+        if ('status' in response && 'data' in response && 'success' in response) {
+          
+          // Se passou em todas as checagens, fazemos o Type Assertion seguro.
+          // O compilador agora aceita porque nós inspecionamos o dado antes.
+          return response as ApiResponse<T>;
+        }
+      }
+      throw new Error("Resposta inválida: não é um objeto ou não tem as propriedades necessárias.");
+    }
+    
+    // --- EXEMPLO DE USO ---
+    // Definimos o contrato do que esperamos receber para um Usuário
+    interface User {
+      id: number;
+      name: string;
+    }
+    
+    // Simulamos um dado bruto que acabou de chegar de um fetch() da internet
+    const dadoBrutoDoServidor = {
+      status: 200,
+      success: true,
+      data: {
+        id: 1,
+        name: "Gabriel",
+      },
+    };
+    
+    // O TypeScript vai olhar lá dentro e garantir que 'respostaFormatada.data' é um 'User'.
+    // Chamando a função e dizendo que o 'T' deve ser o tipo 'User'
+    const respostaFormatada = parseApiResponse<User>(dadoBrutoDoServidor);
+    
+    // Agora o TypeScript sabe exatamente o que tem dentro de 'data'!
+    // A partir daqui, você tem total segurança e autocomplete no seu editor:
+    console.log(respostaFormatada.success);   // Imprime: true
+    console.log(respostaFormatada.data.name); // Imprime: "Gabriel"
+    
+    ```
