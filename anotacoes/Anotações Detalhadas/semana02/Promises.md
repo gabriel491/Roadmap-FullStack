@@ -88,3 +88,117 @@ promessa
     .finally(() => console.log('Pedido Finalizado'));
 
 ```
+
+---
+
+## Métodos de Consumo: `.then()`, `.catch()` e `.finally()`
+
+### 1. `.then()`
+
+Usado exclusivamente para tratar o caso de sucesso (`resolve`).
+
+```jsx
+const somaDoisNumeros = (a, b) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(a + b);
+        }, 5000);
+    });
+};
+
+somaDoisNumeros(1, 3).then((soma) => {
+    document.body.innerText = soma;
+});
+
+```
+
+#### Alternativa Moderna: `async / await`
+
+Em vez de encadear `.then()`, podemos usar `async` e `await` para escrever código assíncrono que se parece com código síncrono:
+
+```jsx
+async function buscarDadosNoGithub() {
+    const response = await fetch('https://api.github.com/users/gabriel491');
+    const body = await response.json();
+    console.log(body);
+}
+
+buscarDadosNoGithub();
+
+```
+
+* O `fetch` busca os dados e o `await` faz o código "esperar" a resposta.
+* Se tirássemos o `await` da linha do `response.json()`, a variável `body` conteria uma Promise pendente, pois o JavaScript continuaria a execução sem esperar a conversão terminar.
+
+---
+
+### 2. `.catch()`
+
+Usado para interceptar e tratar erros gerados na Promise ou nos blocos `.then()`.
+
+```jsx
+const somaDoisNumeros = (a, b) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject("Deu erro :D");
+        }, 2000);
+    });
+};
+
+somaDoisNumeros(1, 3)
+    .then((soma) => {
+        document.body.innerText = soma;
+    })
+    .catch(err => {
+        document.body.innerText = `${err}`;
+    });
+
+```
+
+#### Alternativa com `async / await`: Estrutura `try / catch / finally`
+
+Ao usar `async / await`, não temos as funções `.catch()` diretamente. Usamos blocos nativos `try {} catch {}` do JavaScript:
+
+```jsx
+async function buscarDadosNoGithub() {
+    try {
+        const response = await fetch('ivuobipno'); // URL inválida para forçar o erro
+        const body = await response.json();
+        console.log(body);
+    } catch(err) {
+        // Captura o erro gerado no fetch ou json
+        console.log('Deu pau:', err.message);
+    } finally {
+        console.log('XABLAU - Finalizado!');
+    }
+}
+
+buscarDadosNoGithub();
+
+```
+
+---
+
+### 3. `.finally()`
+
+Este método é executado **sempre** que a Promise chega ao fim (estado *Settled*), independentemente se ela terminou com sucesso (`fulfilled`) ou erro (`rejected`).
+
+* **Exemplo prático de uso:** Desativar uma animação de *Loading* na tela (o loading precisa sumir se der certo ou se der errado).
+
+```jsx
+// Exemplo usando a sintaxe de encadeamento tradicional (conforme a imagem do seu arquivo)
+fetch('https://api.github.com/users/gabriel491')
+    .then(response => {
+        return response.json();
+    })
+    .then(body => {
+        console.log(body);
+    })
+    .catch(err => {
+        console.log('Erro na requisição:', err); 
+    })
+    .finally(() => {
+        console.log('Cabou :D'); // Sempre executa
+    });
+
+```
