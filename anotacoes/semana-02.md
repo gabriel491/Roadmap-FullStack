@@ -17,7 +17,7 @@ Use este modelo para registrar seus aprendizados, códigos práticos, dúvidas e
 
 ### 1. Padrões de Concorrência e Erros
 
-*Detalhes sobre: Promises e Async/Await avançados, podem ser encontrados na aba **Promises** na página **estudar.***
+*Detalhes sobre: Promises e Async/Await avançados, podem ser encontrados no arquivo **Promises** na aba **Anotações Detalhadas.***
 
 > **Estudar**
 > 
