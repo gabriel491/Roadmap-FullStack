@@ -7,7 +7,7 @@ Use este modelo para registrar seus aprendizados, códigos práticos, dúvidas e
 ## 🎯 Metas da Semana
 
 - [x]  Padrões de Concorrência e Erros
-- [ ]  Manipulação Estruturada de Dados
+- [x]  Manipulação Estruturada de Dados
 - [ ]  Controle e Metaprogramação
 - [ ]  Módulos Modernos
 
@@ -20,34 +20,55 @@ Use este modelo para registrar seus aprendizados, códigos práticos, dúvidas e
 *Detalhes sobre: Promises e Async/Await avançados, podem ser encontrados no arquivo **Promises** na aba **Anotações Detalhadas.***
 
 > **Estudar**
-> 
+ 
 
-*Detalhe sobre: Orquestração paralela com `Promise.all` e `Promise.race`.*
+#### *Detalhe sobre: Orquestração paralela com `Promise.all` e `Promise.race`.*
+ - **`Promise.all`:** Executa múltiplas Promises em paralelo e adota a política de "tudo ou nada" (*fail-fast*). Retorna uma array com todos os sucessos, mas falha e vai direto para o `.catch` imediatamente se *uma única* Promise for rejeitada.
+ 
+ - **`Promise.allSettled`:** Mais resiliente, espera todas as Promises terminarem (seja com sucesso ou erro) e retorna uma array detalhando o status individual de cada uma, sem nunca quebrar o fluxo.
+ - **`Promise.race`:** Uma corrida literal de performance. Retorna o resultado (ou erro) da primeira Promise que terminar, ignorando completamente o desfecho das demais. Muito utilizado para criar mecanismos de *timeout*.
 
-> 
-> 
-> 
-> **`Promise.all`:** Executa múltiplas Promises em paralelo e adota a política de "tudo ou nada" (*fail-fast*). Retorna uma array com todos os sucessos, mas falha e vai direto para o `.catch` imediatamente se *uma única* Promise for rejeitada.
-> 
-> - **`Promise.allSettled`:** Mais resiliente, espera todas as Promises terminarem (seja com sucesso ou erro) e retorna uma array detalhando o status individual de cada uma, sem nunca quebrar o fluxo.
-> - **`Promise.race`:** Uma corrida literal de performance. Retorna o resultado (ou erro) da primeira Promise que terminar, ignorando completamente o desfecho das demais. Muito utilizado para criar mecanismos de *timeout*.
+#### *Detalhe sobre: Tratamento robusto de erros com blocos `try/catch` assíncronos.*
 
-*Detalhe sobre: Tratamento robusto de erros com blocos `try/catch` assíncronos.*
-
-> Para capturar erros em funções `async/await`, o uso do bloco `try/catch` é indispensável. Sem ele, rejeições de Promises que acontecem de forma assíncrona geram o erro fatal *Unhandled Promise Rejection*. Um tratamento robusto envolve diferenciar erros previsíveis de infraestrutura (como falhas de rede) de erros de lógica, tratando o fluxo sem derrubar a aplicação.
-> 
+ Para capturar erros em funções `async/await`, o uso do bloco `try/catch` é indispensável. Sem ele, rejeições de Promises que acontecem de forma assíncrona geram o erro fatal *Unhandled Promise Rejection*. Um tratamento robusto envolve diferenciar erros previsíveis de infraestrutura (como falhas de rede) de erros de lógica, tratando o fluxo sem derrubar a aplicação.
+ 
 
 ### 2. Manipulação Estruturada de Dados
 
-*Detalhe sobre: Destructuring avançado de objetos e arrays (com valores padrão e renomeação).*
+***Detalhe sobre: Destructuring avançado de objetos e arrays (com valores padrão e renomeação).***
+ 
+ 
+ A desestruturação serve para extrair dados de estruturas complexas diretamente para variáveis locais. No desenvolvimento web, ela limpa o código ao evitar repetições e previne quebras de layout mapeando valores padrão.
+ 
+ ### Em Objetos
+ 
+ - **Aninhamento:** Permite descer múltiplos níveis de um objeto em uma única linha (`const { data: { user } } = response`).
+ - **Renomeação (`:`):** Altera o nome da variável extraída para evitar conflitos com variáveis locais já existentes no mesmo escopo (`const { id: idDoInput } = input`).
+ - **Valores Padrão (`=`):** Define um valor substituto caso a propriedade venha como `undefined` do banco de dados ou da API (`const { tema = "dark" } = config`).
+ 
+ ### Em Arrays
+ 
+ - **Posicionamento:** A extração é feita com base na ordem dos elementos usando colchetes (`const [primeiro, segundo] = lista`).
+ - **Ignorar Itens:** É possível pular posições deixando espaços vazios entre as vírgulas (`const [, , terceiro] = coordenadas`).
 
-> ...
-> 
+***Detalhe sobre: Spread e Rest operators em funções, arrays e objetos.***
 
-*Detalhe sobre: Spread e Rest operators em funções, arrays e objetos.*
-
-> ...
-> 
+ 
+ 
+ 
+ ### Spread Operator (Expandir / Copiar)
+ 
+ Abre uma estrutura existente e "espalha" seus elementos dentro de uma nova. Sua principal função é garantir a **imutabilidade**, gerando cópias em novos endereços de memória.
+ 
+ - **Em Objetos e Arrays:** Cria uma cópia rasa (*shallow copy*) para que você altere propriedades sem modificar o objeto original criado anteriormente (`const novoEstado = { ...estadoAnterior, ativo: true }`).
+ - **Em Funções:** Passa os elementos de um array como argumentos individuais para uma função (`Math.max(...arrayDeNumeros)`).
+ 
+ ### Rest Operator (Reunir / Agrupar)
+ 
+ Coleta o "resto" dos elementos que sobreram e os agrupa em uma nova estrutura. É uma ferramenta poderosa para **segurança** (OWASP: Sanitização de payloads).
+ 
+ - **Em Funções:** Permite que uma função aceite um número indefinido de argumentos, transformando-os em um array manipulável (`function logar(...erros: string[])`).
+ - **Em Objetos e Arrays:** Separa propriedades específicas que você quer isolar e joga todo o restante em um objeto limpo (`const { isAdmin, ...dadosSeguros } = usuarioBody`).
 
 ### 3. Controle e Metaprogramação
 
@@ -146,7 +167,11 @@ Sempre que for escrever a palavra `await`, faça a si mesmo a seguinte pergunta:
 Anote aqui o que foi mais difícil ou as dúvidas que surgiram para pesquisar depois.
 
 1. *Dúvida 1:* ...
-2. *Ponto de Atenção:* ...
+
+### *Ponto de Atenção:*
+
+- **Crash por valor nulo:** Fazer destructuring diretamente em objetos que podem vir como `null` ou `undefined` quebra o script. Sempre use fallbacks (`const { x } = dado || {}`).
+- **A ilusão da cópia profunda:** O Spread só copia o *primeiro nível* do objeto. Propriedades aninhadas (como objetos dentro de objetos) ainda mantêm a referência de memória original. Para cópias profundas completas, use `structuredClone()`.
 
 ---
 
