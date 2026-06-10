@@ -12,15 +12,15 @@ Adquirir fluência em tipagem estática e recursos modernos/metaprogramação do
 ---
 
 ### 📆 Semana 01: TypeScript Avançado & Configuração
-*   [ ] **Tipagem Estática Avançada**
-    *   [ ] Revisão profunda de tipos primitivos.
-    *   [ ] Diferenças e aplicações práticas de `any`, `unknown`, `void` e `never`.
+*   [x] **Tipagem Estática Avançada**
+    *   [x] Revisão profunda de tipos primitivos.
+    *   [x] Diferenças e aplicações práticas de `any`, `unknown`, `void` e `never`.
 *   [ ] **Modelagem de Tipos e Contratos**
-    *   [ ] Interfaces vs. Type Aliases: diferenças cruciais e quando utilizar cada um.
-    *   [ ] Definição de contratos para objetos, funções e classes.
-*   [ ] **Generics & Reutilização**
-    *   [ ] Criação de funções e componentes genéricos e tipados.
-    *   [ ] Restrições em Generics (`extends`).
+    *   [x] Interfaces vs. Type Aliases: diferenças cruciais e quando utilizar cada um.
+    *   [x] Definição de contratos para objetos, funções e classes.
+*   [x] **Generics & Reutilização**
+    *   [x] Criação de funções e componentes genéricos e tipados.
+    *   [x] Restrições em Generics (`extends`).
 *   [ ] **Decorators & Arquitetura**
     *   [ ] Conceito e introdução prática de Decorators para validação e injeção de dependências.
 *   [ ] **Módulos, Namespaces e Infraestrutura**
