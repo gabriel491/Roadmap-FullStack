@@ -30,13 +30,13 @@ Adquirir fluência em tipagem estática e recursos modernos/metaprogramação do
 ---
 
 ### 📆 Semana 02: ES6+ Avançado & Metaprogramação
-*   [ ] **Padrões de Concorrência e Erros**
-    *   [ ] Promises e Async/Await avançados.
-    *   [ ] Orquestração paralela com `Promise.all` e `Promise.race`.
-    *   [ ] Tratamento robusto de erros com blocos `try/catch` assíncronos.
+*   [x] **Padrões de Concorrência e Erros**
+    *   [x] Promises e Async/Await avançados.
+    *   [x] Orquestração paralela com `Promise.all` e `Promise.race`.
+    *   [x] Tratamento robusto de erros com blocos `try/catch` assíncronos.
 *   [ ] **Manipulação Estruturada de Dados**
-    *   [ ] Destructuring avançado de objetos e arrays (com valores padrão e renomeação).
-    *   [ ] Spread e Rest operators em funções, arrays e objetos.
+    *   [x] Destructuring avançado de objetos e arrays (com valores padrão e renomeação).
+    *   [x] Spread e Rest operators em funções, arrays e objetos.
 *   [ ] **Controle e Metaprogramação**
     *   [ ] Iterators e Generators: funcionamento lógico e casos de uso práticos.
     *   [ ] Proxies e API Reflect: interceptação de operações e metaprogramação de objetos.
