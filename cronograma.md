@@ -15,7 +15,7 @@ Adquirir fluência em tipagem estática e recursos modernos/metaprogramação do
 *   [x] **Tipagem Estática Avançada**
     *   [x] Revisão profunda de tipos primitivos.
     *   [x] Diferenças e aplicações práticas de `any`, `unknown`, `void` e `never`.
-*   [ ] **Modelagem de Tipos e Contratos**
+*   [x] **Modelagem de Tipos e Contratos**
     *   [x] Interfaces vs. Type Aliases: diferenças cruciais e quando utilizar cada um.
     *   [x] Definição de contratos para objetos, funções e classes.
 *   [x] **Generics & Reutilização**
@@ -34,15 +34,15 @@ Adquirir fluência em tipagem estática e recursos modernos/metaprogramação do
     *   [x] Promises e Async/Await avançados.
     *   [x] Orquestração paralela com `Promise.all` e `Promise.race`.
     *   [x] Tratamento robusto de erros com blocos `try/catch` assíncronos.
-*   [ ] **Manipulação Estruturada de Dados**
+*   [x] **Manipulação Estruturada de Dados**
     *   [x] Destructuring avançado de objetos e arrays (com valores padrão e renomeação).
     *   [x] Spread e Rest operators em funções, arrays e objetos.
 *   [ ] **Controle e Metaprogramação**
-    *   [ ] Iterators e Generators: funcionamento lógico e casos de uso práticos.
-    *   [ ] Proxies e API Reflect: interceptação de operações e metaprogramação de objetos.
-*   [ ] **Módulos Modernos**
-    *   [ ] Importação/exportação nomeada e padrão.
-    *   [ ] Dynamic Imports (`import()`) para carregamento sob demanda.
+    *   [x] Iterators e Generators: funcionamento lógico e casos de uso práticos.
+    *   [x] Proxies e API Reflect: interceptação de operações e metaprogramação de objetos.
+*   [x] **Módulos Modernos**
+    *   [x] Importação/exportação nomeada e padrão.
+    *   [x] Dynamic Imports (`import()`) para carregamento sob demanda.
 
 ---
 
