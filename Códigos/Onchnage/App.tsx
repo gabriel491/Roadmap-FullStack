@@ -4,7 +4,7 @@ import { GeradorCracha } from './components/GeradorCracha';
 
 export function App() {
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '20px', backgroundColor: '#f5f7fb', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', fontFamily: 'sans-serif', padding: '20px', backgroundColor: '#f5f7fb', minHeight: '100vh' }}>
       <h1>🛒 Painel de Testes do useState</h1>
       
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'start' }}>
